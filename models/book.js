@@ -36,6 +36,10 @@ var book = {
         return db.query('INSERT INTO user ( `user_name`, `contact`, `email`, `full_name`, `address`, `password`)  VALUES (?,?,?,?,?,?)', [User.user_name, User.contact, User.email, User.full_name, User.address, User.password], callback);
 
     },
+    login: function(User, callback) {
+        return db.query('select count(*) from user where email=? and password=?', [User.email, User.password], callback);
+
+    },
     updateUser: function(id, User, callback) {
         return db.query('UPDATE user SET user_name=?,contact=?,email=?,full_name=?,address=?,password=? WHERE user_id=?', [User.user_name, User.contact, User.email, User.full_name, User.password, User.password, id], callback);
 

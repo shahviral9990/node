@@ -21,15 +21,26 @@ router.delete('/', function(req, res, next) {
         }
     });
 });
-router.post('/', function(req, res, next) {
-    Book.insertUser(req.body, function(row, error) {
-        if (error) {
-            res.json(error);
-        } else {
+router.post('/:id?', function(req, res, next) {
+    if (!req.params.id) {
+        Book.insertUser(req.body, function(row, error) {
+            if (error) {
+                res.json(error);
+            } else {
 
-            res.json(row);
-        }
-    });
+                res.json(row);
+            }
+        });
+    } else {
+        Book.login(req.body, function(row, error) {
+            if (error) {
+                res.json(error);
+            } else {
+
+                res.json(row);
+            }
+        });
+    }
 });
 router.put('/:id', function(req, res, next) {
     Book.updateUser(id, req.body, function(row, error) {

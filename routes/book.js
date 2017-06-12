@@ -68,6 +68,26 @@ router.post('/:id?', function(req, res, next) {
                 }
             });
         }
+        if (req.params.id == 4) {
+
+            Book.updatePrice(req.body, function(row, error) {
+                if (error) {
+                    res.json(error);
+                } else {
+                    res.json(row);
+                }
+            });
+        }
+        if (req.params.id == 5) {
+
+            Book.updatebookDetails(req.body, function(row, error) {
+                if (error) {
+                    res.json(error);
+                } else {
+                    res.json(row);
+                }
+            });
+        }
     }
 });
 module.exports = router;

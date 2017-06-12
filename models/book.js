@@ -33,7 +33,7 @@ var book = {
 
     },
     insertUser: function(User, callback) {
-        return db.query('INSERT INTO user VALUES (?,?,?,?,?,?)', [User.user_name, User.contact, User.email, User.full_name, User.password], callback);
+        return db.query('INSERT INTO user VALUES (?,?,?,?,?,?)', [User.user_name, User.contact, User.email, User.full_name, User.address, User.password], callback);
 
     },
     updateUser: function(id, User, callback) {

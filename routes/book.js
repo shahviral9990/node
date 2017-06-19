@@ -32,18 +32,18 @@ router.post('/:id?', function(req, res, next) {
     var any = req.body;
     if (!req.params.id) {
         var k = 0;
-        Book.insert1(req.body, function(row, error) {
+        Book.insert(req.body, function(row, error) {
             if (error) {
                 // console.log(error);
-                res.json(error);
+                //   res.json(error);
             } else {
                 //console.log(req.body);
                 k = 1;
-                res.json(row);
+                //     res.json(row);
             }
         });
         if (k == 1) {
-            Book.insert(req.body, function(row1, error1) {
+            Book.insert1(req.body, function(row1, error1) {
                 if (error1) {
                     // console.log(error);
                     res.json(error1);
@@ -51,6 +51,8 @@ router.post('/:id?', function(req, res, next) {
                     res.json(row1);
                 }
             });
+        } else {
+            res.json('{"affectedRows":0}');
         }
         // res.json({ 'id': 1 });
     } else {

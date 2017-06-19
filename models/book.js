@@ -17,7 +17,7 @@ var book = {
         return db.query('DELETE book, b_a_p_t FROM book, b_a_p_t WHERE b_a_p_t.book_isbn = book.book_isbn and book.book_isbn=? ', [data.isbn], callback);
     },
     insert1: function(Book, callback) {
-        Console.log(Book.cover);
+        //  Console.log(Book.cover);
         return db.query(' INSERT INTO `book`(`book_isbn`, `book_name`, `mrp`, `price`, `book_status`, `cover_photo`, `book_photo1`, `book_photo2`, `fk_type_id`)  VALUES (?, ?, ?, ?, ?,?,?,?,?);', [Book.isbn, Book.name, Book.price, Book.mrp, Book.status, Book.cover, Book.photo1, Book.photo2, Book.typeid], callback);
 
     },

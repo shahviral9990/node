@@ -30,13 +30,13 @@ router.delete('/', function(req, res, next) {
 });
 router.post('/:id?', function(req, res, next) {
     if (!req.params.id) {
-        Book.insert(req.body, function(row, error) {
+        Book.insert1(req.body, function(row, error) {
             if (error) {
                 // console.log(error);
                 res.json(error);
             } else {
                 //console.log(req.body);
-                Book.insert1(req.body, function(row1, error1) {
+                Book.insert(req.body, function(row1, error1) {
                     if (error1) {
                         // console.log(error);
                         res.json(error1);

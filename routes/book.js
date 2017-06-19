@@ -36,12 +36,12 @@ router.post('/:id?', function(req, res, next) {
                 res.json(error);
             } else {
                 //console.log(req.body);
-                Book.insert1(req.body, function(row, error) {
-                    if (error) {
+                Book.insert1(req.body, function(row1, error1) {
+                    if (error1) {
                         // console.log(error);
-                        res.json(error);
+                        res.json(error1);
                     } else {
-                        res.json(row);
+                        res.json(row1);
                     }
                 });
             }

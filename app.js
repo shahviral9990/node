@@ -29,6 +29,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/book', book);
 app.use('/user', user);
+api.use(bodyParser.json({ 'type': '*/*', limit: '50mb' }));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 // catch 404 and forward to error handler

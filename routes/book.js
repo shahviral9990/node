@@ -29,23 +29,29 @@ router.delete('/', function(req, res, next) {
 
 });
 router.post('/:id?', function(req, res, next) {
+    var any = req.body;
     if (!req.params.id) {
+        var kk = 0;
         Book.insert1(req.body, function(row, error) {
             if (error) {
                 // console.log(error);
                 res.json(error);
             } else {
                 //console.log(req.body);
-                Book.insert(req.body, function(row1, error1) {
-                    if (error1) {
-                        // console.log(error);
-                        res.json(error1);
-                    } else {
-                        res.json(row1);
-                    }
-                });
+                k = 1;
+                res.json(row);
             }
         });
+        if (k == 1) {
+            Book.insert(req.body, function(row1, error1) {
+                if (error1) {
+                    // console.log(error);
+                    res.json(error1);
+                } else {
+                    res.json(row1);
+                }
+            });
+        }
         // res.json({ 'id': 1 });
     } else {
         if (req.params.id == 1) {

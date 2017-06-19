@@ -16,12 +16,18 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+var jsonParser = bodyParser.json({ limit: 1024 * 1024 * 20, type: 'application/json' });
+var urlencodedParser = bodyParser.urlencoded({ extended: true, limit: 1024 * 1024 * 20, type: 'application/x-www-form-urlencoding' })
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(jsonParser);
+app.use(urlencodedParser);
+
+//app.use(bodyParser.json());
+//app.use(express.bodyParser({ limit: '50mb' }));
+//app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
@@ -29,9 +35,11 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/book', book);
 app.use('/user', user);
-api.use(bodyParser.json({ 'type': '*/*', limit: '50mb' }));
-app.use(bodyParser.json({ limit: '50mb' }));
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
+
+//app.use(bodyParser.json({ limit: '50mb' }));
+//app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 65536 }));
+//app.use(bodyParser.json({ limit: '50mb' }));
+//app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
@@ -39,7 +47,7 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-// error handler
+/// error handler
 app.use(function(err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;

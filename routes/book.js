@@ -32,8 +32,10 @@ router.post('/:id?', function(req, res, next) {
     if (!req.params.id) {
         Book.insert(req.body, function(row, error) {
             if (error) {
+                console.log(error);
                 res.json(error);
             } else {
+                //     console.log(row);
                 res.json(row);
             }
         });

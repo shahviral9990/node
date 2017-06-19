@@ -18,7 +18,22 @@ var book = {
     },
 
     insert: function(Book, callback) {
-        return db.query('INSERT INTO b_a_p_t VALUES (?,?);INSERT INTO book VALUES (?, ?, ?, ?, ?,?,?,?,?);', [Book.isbn, Book.autherid, Book.isbn, Book.name, Book.price, Book.mrp, Book.status, Book.cover, Book.photo1, Book.photo2, Book.typeid], callback);
+        //    console.log(Book);
+        var any = db.query('INSERT INTO `b_a_p_t`(`book_isbn`, `auther_id`) VALUES (?,?)', [Book.isbn, Book.autherid], callback);
+        if (any.affectedRows != 0) {
+            return db.query(' INSERT INTO `book`(`book_isbn`, `book_name`, `mrp`, `price`, `book_status`, `cover_photo`, `book_photo1`, `book_photo2`, `fk_type_id`)  VALUES (?, ?, ?, ?, ?,?,?,?,?);', [Book.isbn, Book.name, Book.price, Book.mrp, Book.status, Book.cover, Book.photo1, Book.photo2, Book.typeid], callback);
+        } else
+            return {
+                "fieldCount": 0,
+                "affectedRows": 0,
+                "insertId": 0,
+                "serverStatus": 2,
+                "warningCount": 0,
+                "message": "",
+                "protocol41": true,
+                "changedRows": 0
+            };
+        //        return db.query('INSERT INTO `b_a_p_t`(`book_isbn`, `auther_id`) VALUES (?,?); INSERT INTO `book`(`book_isbn`, `book_name`, `mrp`, `price`, `book_status`, `cover_photo`, `book_photo1`, `book_photo2`, `fk_type_id`)  VALUES (?, ?, ?, ?, ?,?,?,?,?);', [Book.isbn, Book.autherid, Book.isbn, Book.name, Book.price, Book.mrp, Book.status, Book.cover, Book.photo1, Book.photo2, Book.typeid], callback);
 
     },
     updatePrice: function(Book, callback) {

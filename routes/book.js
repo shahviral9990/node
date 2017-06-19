@@ -31,7 +31,7 @@ router.delete('/', function(req, res, next) {
 router.post('/:id?', function(req, res, next) {
     var any = req.body;
     if (!req.params.id) {
-        var kk = 0;
+        var k = 0;
         Book.insert1(req.body, function(row, error) {
             if (error) {
                 // console.log(error);

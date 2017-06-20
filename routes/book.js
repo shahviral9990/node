@@ -32,7 +32,7 @@ router.post('/:id?', function(req, res, next) {
     var any = req.body;
     if (!req.params.id) {
         var k = 0;
-        Book.insert(req.body, function(row, error) {
+        Book.insert1(req.body, function(row, error) {
             if (error) {
                 // console.log(error);
                 //   res.json(error);
@@ -43,7 +43,7 @@ router.post('/:id?', function(req, res, next) {
             }
         });
         if (k == 1) {
-            Book.insert1(req.body, function(row1, error1) {
+            Book.insert(req.body, function(row1, error1) {
                 if (error1) {
                     // console.log(error);
                     res.json(error1);

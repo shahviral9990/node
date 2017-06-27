@@ -4,11 +4,14 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var upload = require('express-fileupload');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var book = require('./routes/book');
+var busboy = require('connect-busboy');
+var fs = require('fs-extra');
 var user = require('./routes/user');
+var uploads = require('./routes/upload');
 var cors = require('cors');
 var app = express();
 
@@ -18,24 +21,27 @@ app.set('view engine', 'jade');
 
 var jsonParser = bodyParser.json({ limit: 1024 * 1024 * 20, type: 'application/json' });
 var urlencodedParser = bodyParser.urlencoded({ extended: true, limit: 1024 * 1024 * 20, type: 'application/x-www-form-urlencoding' })
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+    //app.use(express.bodyParser({ keepExtensions: true, uploadDir: __dirname + '/public/uploads' }));
+    // uncomment after placing your favicon in /public
+    //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(jsonParser);
+app.use(busboy());
 app.use(urlencodedParser);
-
+app.use(upload());
 //app.use(bodyParser.json());
 //app.use(express.bodyParser({ limit: '50mb' }));
 //app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/uploads')));
+
 app.use(cors());
 app.use('/', index);
 app.use('/users', users);
 app.use('/book', book);
 app.use('/user', user);
-
+app.use('/upload', uploads);
 //app.use(bodyParser.json({ limit: '50mb' }));
 //app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 65536 }));
 //app.use(bodyParser.json({ limit: '50mb' }));

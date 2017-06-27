@@ -1,0 +1,77 @@
+ng g c demo
+
+c for copmponent 
+g for generate
+demo named component will be created
+
+to call any component go to app.component.html page then
+<app-demo></app-demo>
+
+ng serve to run the page
+
+localhost:4200
+
+angular:-
+html
+stylescript
+css
+
+Data Binding:-
+
+String{{}}
+Method()-click event
+Property[]-dynamic change property of variable
+Two-way binding[()]-whatsapp typing 
+Template#-same functionality but do not reduce the speed
+
+
+a:number=10;
+
+
+<h1>{{a}}</h1>
+
+live to reload functionality of js-do not reload the page in browser
+
+<button (click)="onClick()">Click me</button>
+
+
+two way binding
+
+
+<input type="text" [(ngModel)]="str">
+str:string='viral shah';
+<h1>{{str}}</h1>
+
+detect every element change
+
+template
+
+<input type="text" (keyup)="0" #input1>
+<h1>{{input1.value}}</h1>
+
+
+
+
+
+export is used to user class
+
+
+export class task{
+public constructor(public id:String,public Title:String,public Status:string)
+{}
+}
+
+
+
+pipe is used to change the view of html not data
+2 type
+inbuile and custom
+
+
+ng g p double
+
+to create custome pipe
+
+
+
+
